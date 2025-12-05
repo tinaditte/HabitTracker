@@ -43,11 +43,15 @@ struct FontStyler: ViewModifier {
                 .font(.componentRegular())
                 .foregroundStyle(.darkBlue)
             
-            
         case .tab:
             return content
                 .font(.componentBold())
                 .foregroundStyle(.midBlue)
+            
+        case .tabSelected:
+            return content
+                .font(.componentBold())
+                .foregroundStyle(.brigthOrange)
 
         case .tinyNoteDark:
             return content
@@ -82,6 +86,7 @@ enum FontStyle {
     case smallTitleDarkBold
     case regularDark
     case tab
+    case tabSelected
     case tinyNoteDark
     case buttonDark
     case statisticPositive

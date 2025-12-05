@@ -10,16 +10,25 @@ import Combine
 
 class TabBarViewModel: TabBarViewModelType {
     
-    @Published var selectedTab: AppTabs
+    @Published var selectedTabIndex: Int = 0
+    @Published var selectedTabConfig: AppTabConfig?
 
-    var appTabs: [AppTabs]
+    var appTabs: [AppTabConfig]
+    var selectedTab: AppTabConfig?
     
-    init(appTabs: [AppTabs], selectedTab: AppTabs) {
+    init(appTabs: [AppTabConfig]) {
         self.appTabs = appTabs
-        self.selectedTab = selectedTab
+        
+        if let firstTab = appTabs.first {
+            selectedTabIndex = 0
+            selectedTabConfig = firstTab
+        }
     }
     
-    func selectTab(_ tab: AppTabs) {
-        selectedTab = tab
+    func selectTab(at index: Int) {
+        guard appTabs.indices.contains(index) else { return }
+
+        selectedTabIndex = index
+        selectedTabConfig = appTabs[index]
     }
 }

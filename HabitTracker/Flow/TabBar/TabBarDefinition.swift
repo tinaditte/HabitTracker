@@ -12,26 +12,28 @@ protocol TabBarCreateModuleType {
 }
 
 protocol TabBarViewModelType: ObservableObject, AnyObject {
-    var appTabs: [AppTabs] { get }
-    var selectedTab: AppTabs { get set }
+    var appTabs: [AppTabConfig] { get }
+    var selectedTabIndex: Int { get }
+    var selectedTabConfig: AppTabConfig? { get }
     
-    func selectTab(_ tab: AppTabs)
+    func selectTab(at index: Int)
 }
 
-protocol TabBarRouterType: AnyObject {
-    func navigate(to tab: AppTabs)
+struct AppTabConfig {
+    let id: AppTab
+    let rootView: AnyView
 }
 
-enum AppTabs: Equatable, Hashable {    
+enum AppTab: Equatable, Hashable {
     case weekly
-    case create
+    case habitList
     case overview
     
     var title: String {
         switch self {
         case .weekly:
             return "Weekly"
-        case .create:
+        case .habitList:
             return "Habit editor"
         case .overview:
             return "Overview"
@@ -42,7 +44,7 @@ enum AppTabs: Equatable, Hashable {
         switch self {
         case .weekly:
             return .weekly
-        case .create:
+        case .habitList:
             return .habitList
         case .overview:
             return .overview

@@ -26,3 +26,16 @@ extension Color {
     static let htHabitCoral = Color("HabitCoral")
     
 }
+
+extension HabitColor {
+    var color: Color {
+        switch self {
+        case .wine: return .htHabitWine
+        case .teal: return .htHabitTeal
+        case .purple: return .htHabitPurple
+        case .olive: return .htHabitOlive
+        case .green: return .htHabitGreen
+        case .coral: return .htHabitCoral
+        }
+    }
+}
