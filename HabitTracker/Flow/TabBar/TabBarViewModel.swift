@@ -14,7 +14,6 @@ class TabBarViewModel: TabBarViewModelType {
     @Published var selectedTabConfig: AppTabConfig?
 
     var appTabs: [AppTabConfig]
-    var selectedTab: AppTabConfig?
     
     init(appTabs: [AppTabConfig]) {
         self.appTabs = appTabs

@@ -14,16 +14,18 @@ struct TabBarView<ViewModel: TabBarViewModelType>: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             
-            viewModel.selectedTabConfig?.rootView
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background {
-                    LinearGradient(
-                        gradient: Gradient(colors: [.contrast, .whiteBlue]),
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                }
-                .ignoresSafeArea()
+            if let config = viewModel.selectedTabConfig {
+                config.rootView
+                    .appTabRootViewBackground()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .id(config.id)
+                    .transition(.opacity)
+                    .animation(.easeInOut, value: viewModel.selectedTabIndex)
+            } else {
+                EmptyView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .appTabRootViewBackground()
+            }
             
             HStack {
                 ForEach(viewModel.appTabs.enumerated(), id: \.element.id) { index, tab in
